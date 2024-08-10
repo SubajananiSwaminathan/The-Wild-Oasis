@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 import BookingDataBox from "./BookingDataBox";
-import Row from "../../ui/Row";
-import Heading from "../../ui/Heading";
-import Tag from "../../ui/Tag";
-import ButtonGroup from "../../ui/ButtonGroup";
-import Button from "../../ui/Button";
-import ButtonText from "../../ui/ButtonText";
+import Row from "../../UI/Row";
+import Heading from "../../UI/Heading";
+import Tag from "../../UI/Tag";
+import ButtonGroup from "../../UI/ButtonGroup";
+import Button from "../../UI/Button";
+import ButtonText from "../../UI/ButtonText";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
 

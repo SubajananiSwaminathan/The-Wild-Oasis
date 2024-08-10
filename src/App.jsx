@@ -7,14 +7,14 @@ import GlobalStyles from "./styles/GlobalStyles";
 
 import AppLayout from "./UI/AppLayout";
 
-import Dashboard from "./pages/Dashboard";
+import Account from "./pages/Account";
 import Bookings from "./pages/Bookings";
 import Cabins from "./pages/Cabins";
-import Users from "./pages/Users";
-import Settings from "./pages/Settings";
-import Account from "./pages/Account";
+import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
+import Settings from "./pages/Settings";
+import Users from "./pages/Users";
 
 const queryClient = new QueryClient({
   defaultOptions: {

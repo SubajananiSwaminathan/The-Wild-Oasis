@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Button from "../../ui/Button";
-import Form from "../../ui/Form";
-import Input from "../../ui/Input";
-import FormRowVertical from "../../ui/FormRowVertical";
+import Button from "../../UI/Button";
+import Form from "../../UI/Form";
+import Input from "../../UI/Input";
+import FormRowVertical from "../../UI/FormRowVertical";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
