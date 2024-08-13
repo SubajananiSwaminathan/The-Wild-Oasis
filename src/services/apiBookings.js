@@ -1,5 +1,30 @@
-import { getToday } from "../utilities/helpers";
 import supabase from "./supabase";
+
+import { getToday } from "../utilities/helpers";
+
+export async function getBookings({ filter, sortBy }) {
+  let query = supabase
+    .from("bookings")
+    .select(
+      "id, created_at, start_date, end_date, no_of_nights, no_of_guests, status, total_price, cabins(name), guests(full_name, email)"
+    );
+
+  if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
+
+  if (sortBy)
+    query = query.order(sortBy.field, {
+      ascending: sortBy.direction === "asc",
+    });
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error(error);
+    throw new Error("Bookings cannot be loaded");
+  }
+
+  return data;
+}
 
 export async function getBooking(id) {
   const { data, error } = await supabase
@@ -20,7 +45,7 @@ export async function getBooking(id) {
 export async function getBookingsAfterDate(date) {
   const { data, error } = await supabase
     .from("bookings")
-    .select("created_at, totalPrice, extrasPrice")
+    .select("created_at, total_price, extras_price")
     .gte("created_at", date)
     .lte("created_at", getToday({ end: true }));
 
@@ -37,9 +62,9 @@ export async function getStaysAfterDate(date) {
   const { data, error } = await supabase
     .from("bookings")
     // .select('*')
-    .select("*, guests(fullName)")
-    .gte("startDate", date)
-    .lte("startDate", getToday());
+    .select("*, guests(full_name)")
+    .gte("start_date", date)
+    .lte("start_date", getToday());
 
   if (error) {
     console.error(error);
@@ -53,9 +78,9 @@ export async function getStaysAfterDate(date) {
 export async function getStaysTodayActivity() {
   const { data, error } = await supabase
     .from("bookings")
-    .select("*, guests(fullName, nationality, countryFlag)")
+    .select("*, guests(full_name, nationality, country_flag)")
     .or(
-      `and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.checked-in,endDate.eq.${getToday()})`
+      `and(status.eq.unconfirmed,start_date.eq.${getToday()}),and(status.eq.checked-in,end_date.eq.${getToday()})`
     )
     .order("created_at");
 
