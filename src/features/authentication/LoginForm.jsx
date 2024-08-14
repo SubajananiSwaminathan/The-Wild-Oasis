@@ -1,14 +1,32 @@
 import { useState } from "react";
+
+import { useLogin } from "./useLogin";
+
 import Button from "../../UI/Button";
 import Form from "../../UI/Form";
-import Input from "../../UI/Input";
 import FormRowVertical from "../../UI/FormRowVertical";
+import Input from "../../UI/Input";
+import SpinnerMini from "../../UI/SpinnerMini";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("jane@example.com");
+  const [password, setPassword] = useState("janedoe1234");
 
-  function handleSubmit() {}
+  const { login, isLoading } = useLogin();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (!email || !password) return;
+    login(
+      { email, password },
+      {
+        onSettled: () => {
+          setEmail("");
+          setPassword("");
+        },
+      }
+    );
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -16,10 +34,10 @@ function LoginForm() {
         <Input
           type="email"
           id="email"
-          // This makes this form better for password managers
           autoComplete="username"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
+          disabled={isLoading}
         />
       </FormRowVertical>
       <FormRowVertical label="Password">
@@ -28,11 +46,14 @@ function LoginForm() {
           id="password"
           autoComplete="current-password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
+          disabled={isLoading}
         />
       </FormRowVertical>
       <FormRowVertical>
-        <Button size="large">Login</Button>
+        <Button size="large" disabled={isLoading}>
+          {!isLoading ? "Login" : <SpinnerMini />}
+        </Button>
       </FormRowVertical>
     </Form>
   );
