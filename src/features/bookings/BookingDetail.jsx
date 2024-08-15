@@ -16,6 +16,7 @@ import Button from "../../UI/Button";
 import ButtonGroup from "../../UI/ButtonGroup";
 import ButtonText from "../../UI/ButtonText";
 import ConfirmDelete from "../../UI/ConfirmDelete";
+import Empty from "../../UI/Empty";
 import Heading from "../../UI/Heading";
 import Modal from "../../UI/Modal";
 import Row from "../../UI/Row";
@@ -38,6 +39,7 @@ function BookingDetail() {
   const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
+  if (!booking) return <Empty resource="booking" />;
 
   const { status, id: bookingId } = booking;
 
