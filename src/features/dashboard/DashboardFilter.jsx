@@ -1,4 +1,4 @@
-import Filter from "UI/Filter";
+import Filter from "../../UI/Filter";
 
 function DashboardFilter() {
   return (

@@ -4,7 +4,7 @@ import { HiOutlineUser } from "react-icons/hi2";
 import styled from "styled-components";
 
 import ButtonIcon from "./ButtonIcon";
-// import DarkModeToggle from "./DarkModeToggle";
+import DarkModeToggle from "./DarkModeToggle";
 
 import Logout from "../features/authentication/Logout";
 
@@ -23,9 +23,9 @@ function HeaderMenu() {
           <HiOutlineUser />
         </ButtonIcon>
       </li>
-      {/* <li>
+      <li>
         <DarkModeToggle />
-      </li> */}
+      </li>
       <li>
         <Logout />
       </li>
